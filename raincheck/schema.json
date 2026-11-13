@@ -1,0 +1,49 @@
+{
+  "assignments": {
+    "keys": [
+      "shift_id"
+    ],
+    "columns": [
+      "shift_id",
+      "town_id",
+      "team_id",
+      "block_id",
+      "start",
+      "end",
+      "assigned_mode"
+    ]
+  },
+  "items": {
+    "keys": [
+      "item_id"
+    ],
+    "columns": [
+      "item_id",
+      "shift_id",
+      "opened_at",
+      "completed_at",
+      "actual_mode",
+      "missed",
+      "known_at"
+    ]
+  },
+  "blocks": {
+    "keys": [
+      "block_id"
+    ],
+    "columns": [
+      "block_id",
+      "allowed_sequences",
+      "randomization_unit"
+    ]
+  },
+  "teams": {
+    "keys": [
+      "team_id"
+    ],
+    "columns": [
+      "team_id",
+      "town_ids"
+    ]
+  }
+}
