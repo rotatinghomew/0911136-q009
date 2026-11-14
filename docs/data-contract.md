@@ -8,6 +8,10 @@
 
 `raincheck/analysis.py` 生成现行资料摘要。源码和运行结果中的 scope 说明其统计边界，不能把未提供的推断当成已有能力。
 
+## 试点效果分析
+
+`raincheck/pilot.py` 在现行摘要之外提供试点效果分析，运行入口见 README。主分析按原始分配（ITT），以 team-block 为随机化单位做受限随机化精确检验（每个区组只在 allowed_sequences 内整体重抽，枚举全部组合）；分析截点用 metadata.cutoff 并按 known_at 过滤记录，观察窗内未完成事项按删失处理。违背设计（序列不在允许集合、区组内缺臂）或样本不足（臂内事项数低于下限）的区组被降级，不进入主分析。漏接风险只在 missed 非 null 的记录上计算，未知状态单独计数。报告将可归因于设计的证据（confirmatory）与探索性描述（exploratory）分开，并在 comparability 中量化跨班遗留、共用队伍与删失对可比性的影响。
+
 ## 供数接口
 
 `GET /manifest` 返回 generation、tables（每表 count 与 sha256）及 metadata。`GET /tables/<name>?generation=<generation>` 返回同代 rows。供数换代时旧 generation 返回 HTTP 409，不允许将新代记录接入旧分析；不存在的表返回 404。表内容为稳定键唯一的完整同代记录，不是增量事件流。客户端对清单摘要进行核验。摘要使用 UTF-8、排序对象键、紧凑 JSON 的 SHA256，数组顺序保留供数端顺序。

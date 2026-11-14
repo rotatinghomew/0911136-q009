@@ -16,6 +16,16 @@ python3 -m raincheck.runner --output /tmp/raincheck-summary.json
 
 当前能力是源码 `analysis.py` 定义的摘要，不会自动给出其他统计推断。输出中的 scope 说明边界，sources 记录资料依据。
 
+## 试点效果分析
+
+在保留现行摘要的同时，`pilot.py` 提供遵循受限随机分配的设计内推断：
+
+```sh
+python3 -m raincheck.runner --pilot --output /tmp/raincheck-pilot.json
+```
+
+主分析（confirmatory）按原始分配（assigned_mode，ITT）比较两种叫应方式的处置完成时长与漏接风险：以 team-block 为随机化单位，每个区组仅在允许序列内整体重抽，枚举全部 2^8 种分配做精确检验；观察窗内未结事项按删失处理，不计为零耗时也不剔除。违背设计或样本不足的区组被降级，不进入主分析。输出中 comparability 量化跨班遗留、共用队伍与删失对可比性的影响，exploratory 为不遵循分配设计的探索性描述，conclusion 给出是否具备推广依据的判断；证据不足时不会强行选择赢家。
+
 ## 分开运行供数与应用
 
 ```sh
